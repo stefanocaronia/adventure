@@ -1,5 +1,8 @@
+# Universal MakeFile v1.1
+
 # Declaration of variables
 CC = g++
+DB = gdb
 RM = rm
 MD = mkdir
 CP = cp
@@ -50,8 +53,7 @@ remake: clean all
 
 #Copy Resources from Resources Directory to Target Directory
 resources: directories
-	@echo - Copio le cartelle risorse
-	@$(CP) $(RESDIR)/* $(TARGETDIR)/
+	@if [ -f $(RESDIR) ]; then @echo - Copio le cartelle risorse && @$(CP) $(RESDIR)/* $(TARGETDIR)/; fi
 
 #Make the Directories
 directories:
@@ -82,7 +84,7 @@ run: all
 
 debug: all
 	@echo - Eseguo il programma in debug mode...
-	@cd $(TARGETDIR) && gdb $(TARGET)
+	@cd $(TARGETDIR) && $(DB) $(TARGET)
 
 cls:
 	@cls
