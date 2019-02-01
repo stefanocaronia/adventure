@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(Windows) Launch",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}\\dist\\Adventure.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}\\dist\\",
+            "environment": [],
+            "externalConsole": true
+        },
+        {
+            "name": "Debug (GDB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "targetArchitecture": "x86",
+            "program": "${workspaceRoot}\\dist\\Adventure.exe",
+            "miDebuggerPath":"gdb.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}\\dist\\",
+            "externalConsole": true,
+            "preLaunchTask": "Build"　　
+        }
+    ]
+ }
