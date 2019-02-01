@@ -31,7 +31,7 @@ private:
 
     string title = "Adventure";
     string version = "v1.0";
-    string PROMPT = "$";
+    string PROMPT = ">";
 
     conf config;
 
@@ -62,17 +62,15 @@ private:
     void cursorLeft();
     void cursorRight();
 
-    vector<string> files;
     vector<string> history;
     unsigned int history_pos = 0;
+    unsigned int cursorPosInCommandLine;
 
     HANDLE hConsole;
     COORD cursorPosition;
     CONSOLE_SCREEN_BUFFER_INFO csbi;
-    unsigned int cursorPosInCommandLine;
     string commandLine;
 };
 
 /* UTILITY */
 vector<string> split(string, char);
-vector<string> filesindir(string);

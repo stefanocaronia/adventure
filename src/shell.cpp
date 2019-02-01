@@ -36,8 +36,9 @@ void Shell::run() {
 
         if (commandLine.length() > 0) {
             result = process(commandLine);
-            if (result > 0) cout << ERROR_COLOR << "ERROR " << result << endl;
-            cout << endl;
+            if (result > 0) {
+                cout << ERROR_COLOR << "ERROR " << result << endl;
+            }
         }
     }
 }
@@ -46,7 +47,6 @@ string Shell::input() {
     commandLine = "";
     string currentWord = "";
     cursorPosInCommandLine = 0;
-    string currentWordCompl = "";
     char ch;
 
     while (((ch = _getch()) != '\r')) {
@@ -121,6 +121,12 @@ int Shell::process(string cline) {
     } else {
         // il gioco
     }
+
+    for (string co : history) {
+        cout << co << ":";
+    }
+
+    cout << endl;
 
     return result;
 }

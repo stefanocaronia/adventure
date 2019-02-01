@@ -5,10 +5,10 @@
             "name": "(Windows) Launch",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceRoot}\\dist\\Adventure.exe",
+            "program": "${workspaceRoot}\\bin\\Adventure.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceRoot}\\dist\\",
+            "cwd": "${workspaceRoot}\\bin\\",
             "environment": [],
             "externalConsole": true
         },
@@ -17,11 +17,11 @@
             "type": "cppdbg",
             "request": "launch",
             "targetArchitecture": "x86",
-            "program": "${workspaceRoot}\\dist\\Adventure.exe",
+            "program": "${workspaceRoot}\\bin\\adventure.exe",
             "miDebuggerPath":"gdb.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceRoot}\\dist\\",
+            "cwd": "${workspaceRoot}\\bin\\",
             "externalConsole": true,
             "preLaunchTask": "Build"　　
         }
