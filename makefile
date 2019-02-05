@@ -10,11 +10,11 @@ DEBUG = true
 
 #The Target Binary Program
 ROOT_DIR = $(CURDIR);
-THIS_DIR = $(shell basename $(CURDIR))
+THIS_DIR = $(shell basename "$(CURDIR)")
 TARGET = $(THIS_DIR).exe
 
 #PATHS
-BASE_LIBS	= D:\lib\mingw-dev-libs
+BASE_LIBS	= ..\..\mingw-dev-libs
 
 #The Directories, Source, Includes, Objects, Binary and Resources
 BUILDDIR	= obj

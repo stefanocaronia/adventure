@@ -1,22 +1,15 @@
-#include <conio.h>
-#include <windows.h>
-#include <cstdio>
-#include <fstream>
-#include <iostream>
-#include <memory>
-#include <sstream>
-#include <string>
-#include <vector>
 
-#include "colors.h"
-#include "globals.h"
+
 #include "shell.h"
 
 using namespace std;
 
 Shell::Shell() {
-    SetConsoleTitle("Adventure");
+    SetConsoleTitleA("Adventure");
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    HWND console = GetConsoleWindow();
+    MoveWindow(console, 200, 200, 800, 600, true);
 }
 
 Shell::~Shell() {}
@@ -52,34 +45,24 @@ string Shell::input() {
     while (((ch = _getch()) != '\r')) {
         refreshCSBI();
 
+        //cout << "[" << (int)ch << "|"<< ch << "] ";
+
         switch (ch) {
-            case KEY_UP:
-                for (unsigned int c = 0; c < commandLine.length(); c++) {
-                    cout << char(KEY_BACKSPACE) << " " << char(KEY_BACKSPACE);
+            case ESCAPE:
+                switch (_getch()) {
+                    case KEY_LEFT:
+                        cursorLeft();
+                        break;
+                    case KEY_RIGHT:
+                        cursorRight();
+                        break;
+                    case KEY_UP:
+                        historyUp();
+                        break;
+                    case KEY_DOWN:
+                        historyDown();
+                        break;
                 }
-                commandLine = history[history_pos];
-                cout << commandLine;
-                if (history_pos > 0) history_pos--;
-                cursorPosInCommandLine = commandLine.length();
-                break;
-            case KEY_DOWN:
-                for (unsigned int c = 0; c < commandLine.length(); c++) {
-                    cout << char(KEY_BACKSPACE) << " " << char(KEY_BACKSPACE);
-                }
-                commandLine = history[history_pos];
-                cout << commandLine;
-                if (history_pos < history.size() - 1) history_pos++;
-                cursorPosInCommandLine = commandLine.length();
-                break;
-            /*case KEY_LEFT:
-                    cursorLeft();
-                    break;*/
-            case -32:
-                if (_getch() == KEY_LEFT) cursorLeft();
-                if (_getch() == KEY_RIGHT) cursorRight();
-                break;
-            case KEY_RIGHT:
-                cursorRight();
                 break;
             case KEY_BACKSPACE:
                 if (commandLine.size() > 0) {
@@ -87,6 +70,8 @@ string Shell::input() {
                     commandLine.erase(commandLine.size() - 1);
                 }
                 cursorPosInCommandLine = commandLine.length();
+                break;
+            case KEY_ESC:
                 break;
             default:
                 if (cursorPosInCommandLine == commandLine.length()) {
@@ -102,17 +87,32 @@ string Shell::input() {
 
 int Shell::process(string cline) {
     int result = 0;
-    vector<string> cparts;
-    cparts = split(cline, ' ');
-    string command = cparts[0];
+    string command = "";
+    vector<string> words;
+
+    // pulisco la line
+    cline = toLower(cline);
+    cline = replaceChar(cline, '?', ' ');
+    cline = trim(cline);
+
+    // ottengo le parole
+    words = split(cline, ' ');
+
+    // pulisco il command
+    command = toLower(words[0]);
+    command = replaceChar(command, '?', ' ');
+    command = trim(command);
+
+    // cout << command;
 
     cout << OUTPUT_COLOR;
 
     history.push_back(cline);
-    history_pos = history.size() - 1;
+    historyPos = history.size() - 1;
 
-    if (command == "cls") {
-        result = system(cline.c_str());
+    if (command == "cls" || command == "clear") {
+        //result = system(cline.c_str());
+        result = system("cls");
         printHeader(false);
     } else if (command == "ciao") {
         cout << CUSTOM_COLOR << "Cazzo vuoi?" << endl;
@@ -122,17 +122,11 @@ int Shell::process(string cline) {
         // il gioco
     }
 
-    for (string co : history) {
-        cout << co << ":";
-    }
-
-    cout << endl;
-
     return result;
 }
 
 void Shell::printHeader(bool with_endl = true) {
-    cout << TITLE_COLOR << "Welcome to " << title << " " << version << " by s.caronia" << endl;
+    cout << TITLE_COLOR << "Welcome to " << title << " " << version << " by s.caronia" << endl << endl;
 }
 
 string Shell::getCurrentWord(string& cline) {
@@ -163,6 +157,32 @@ void Shell::cursorLeft() {
     SetConsoleCursorPosition(hConsole, newCoord);
 }
 
+void Shell::historyUp() {
+    if (history.size() == 0) {
+        return;
+    }
+    for (unsigned int c = 0; c < commandLine.length(); c++) {
+        cout << char(KEY_BACKSPACE) << " " << char(KEY_BACKSPACE);
+    }
+    commandLine = history[historyPos];
+    cout << commandLine;
+    if (historyPos > 0) historyPos--;
+    cursorPosInCommandLine = commandLine.length();
+}
+
+void Shell::historyDown() {
+    if (history.size() == 0) {
+        return;
+    }
+    for (unsigned int c = 0; c < commandLine.length(); c++) {
+        cout << char(KEY_BACKSPACE) << " " << char(KEY_BACKSPACE);
+    }
+    commandLine = history[historyPos];
+    cout << commandLine;
+    if (historyPos < history.size() - 1) historyPos++;
+    cursorPosInCommandLine = commandLine.length();
+}
+
 void Shell::cursorRight() {
     if (cursorPosInCommandLine == commandLine.length()) return;
     COORD newCoord;
@@ -172,16 +192,3 @@ void Shell::cursorRight() {
     cursorPosInCommandLine++;
 }
 
-/* UTILITY FUNCTIONS */
-
-vector<string> split(string text, char delim) {
-    vector<string> elements;
-    stringstream stream(text);
-    string item;
-    while (getline(stream, item, delim)) {
-        item.erase(0, item.find_first_not_of(" \n\r\t"));
-        item.erase(item.find_last_not_of(" \n\r\t") + 1);
-        elements.push_back(item);
-    }
-    return elements;
-}

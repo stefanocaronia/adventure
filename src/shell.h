@@ -1,11 +1,18 @@
 #pragma once
 
+#include <conio.h>
 #include <windows.h>
+#include <cstdio>
+#include <fstream>
+#include <iostream>
+#include <memory>
 #include <map>
 #include <string>
 #include <vector>
 
+#include "colors.h"
 #include "globals.h"
+#include "utility.h"
 
 using namespace std;
 
@@ -35,8 +42,8 @@ private:
 
     conf config;
 
-    concol TITLE_COLOR = yellow;
-    concol PROMPT_COLOR = yellow;
+    concol TITLE_COLOR = gray;
+    concol PROMPT_COLOR = white;
     concol COMMAND_COLOR = white;
     concol OUTPUT_COLOR = gray;
     concol CUSTOM_COLOR = magenta;
@@ -49,7 +56,9 @@ private:
         KEY_LEFT = 75,
         KEY_RIGHT = 77,
         KEY_BACKSPACE = 8,
-        KEY_TAB = 9
+        KEY_TAB = 9,
+        KEY_ESC = 27,
+        ESCAPE = -32
     };
 
     string input();
@@ -61,9 +70,11 @@ private:
     void refreshCSBI();
     void cursorLeft();
     void cursorRight();
+    void historyUp();
+    void historyDown();
 
     vector<string> history;
-    unsigned int history_pos = 0;
+    unsigned int historyPos = 0;
     unsigned int cursorPosInCommandLine;
 
     HANDLE hConsole;

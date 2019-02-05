@@ -52,6 +52,7 @@
         "xutility": "cpp",
         "array": "cpp",
         "*.tcc": "cpp",
-        "cwctype": "cpp"
+        "cwctype": "cpp",
+        "algorithm": "cpp"
     }
 }
