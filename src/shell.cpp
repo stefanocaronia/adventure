@@ -1,8 +1,5 @@
-
-
 #include "shell.h"
-
-using namespace std;
+#include "colors.h"
 
 Shell::Shell() {
     SetConsoleTitleA("Adventure");

@@ -19,7 +19,7 @@ std::string toLower(const std::string& txt) {
 }
 
 std::string replaceChar(std::string str, char search, char replace) {
-    for (int i = 0; i < str.length(); ++i) {
+    for (unsigned int i = 0; i < str.length(); ++i) {
         if (str[i] == search)
             str[i] = replace;
     }

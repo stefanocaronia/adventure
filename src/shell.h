@@ -5,12 +5,11 @@
 #include <cstdio>
 #include <fstream>
 #include <iostream>
-#include <memory>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
-#include "colors.h"
 #include "globals.h"
 #include "utility.h"
 

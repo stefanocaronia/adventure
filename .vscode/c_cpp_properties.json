@@ -4,7 +4,7 @@
             "name": "Adventure",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\bin\\mingw\\include\\**"
+                "D:/bin/mingw/include/**"
             ],
             "defines": [
                 "_DEBUG",

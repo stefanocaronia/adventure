@@ -1,10 +1,6 @@
-#include <iostream>
-
 #include "shell.h"
 
-using namespace std;
-
-int main(int argc, char* argv[]) {
+int main() {
 
     Shell shell;
     shell.run();

@@ -1,16 +1,16 @@
 #pragma once
+
 #include <windows.h>
 #include <iostream>
+
 #include "globals.h"
 
-inline void setcolor(concol textcol, concol backcol);
-inline void setcolor(int textcol, int backcol);
+inline void setcolor(concol, concol);
+inline void setcolor(int, int);
 int textcolor();
 int backcolor();
 
 #define std_con_out GetStdHandle(STD_OUTPUT_HANDLE)
-
-using namespace std;
 
 int textcolor() {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
