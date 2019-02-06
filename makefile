@@ -27,7 +27,7 @@ DEPEXT		= d
 OBJEXT		= o
 
 #Flags, Libraries and Includes
-CFLAGS		= -std=c++11
+CFLAGS		= -std=c++17
 LIB 		=
 INC 		= -I$(INCDIR)
 #LIB			= -L$(BASE_LIBS)\SDL2-2.0.3\lib -lmingw32 -lgdi32 -lSDL2main -lSDL2 -static-libgcc
