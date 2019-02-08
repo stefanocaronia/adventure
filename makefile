@@ -1,4 +1,4 @@
-# Universal MakeFile v1.1
+# Universal MakeFile v1.2
 
 # Declaration of variables
 CC = g++
@@ -69,7 +69,7 @@ clean:
 
 #Link
 $(TARGET): $(OBJECTS)
-	@echo - Link alle librerie
+	@echo - Link eseguibile $(TARGET)
 	$(CC) $(CFLAGS) -o $(TARGETDIR)/$(TARGET) $(OBJECTS) $(LIB)
 
 #Compile
@@ -79,11 +79,11 @@ $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 run: all
-	@echo - Eseguo il programma...
+	@echo - Eseguo $(TARGET)
 	@cd $(TARGETDIR) && ./$(TARGET)
 
 debug: all
-	@echo - Eseguo il programma in debug mode...
+	@echo - Eseguo $(TARGET) in debug mode...
 	@cd $(TARGETDIR) && $(DB) $(TARGET)
 
 cls:

@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "Adventure",
+            "name": "${workspaceFolderBasename}",
             "includePath": [
                 "${workspaceFolder}/**",
                 "F:/bin/mingw64/mingw64/**",

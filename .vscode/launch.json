@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "targetArchitecture": "x86",
-            "program": "${workspaceRoot}/bin/adventure.exe",
+            "program": "${workspaceRoot}/bin/${workspaceFolderBasename}.exe",
             "miDebuggerPath":"gdb.exe",
             "args": [],
             "stopAtEntry": false,

@@ -10,7 +10,16 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "mingw32-make.exe"
+            "command": "mingw32-make"
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "command": "mingw32-make clean"
         }
     ]
 }
